@@ -86,7 +86,7 @@ def bisection_search(func, left, right, tol=1e-3, max_it=100):
 
         # ======================================================================================
         # (4) compare the signs and update the interval accordingly
-        if func_val_mid * func_val_left > 0:
+        if (func_val_mid * func_val_left) > 0:
             left = mid
         else:
             right = mid
