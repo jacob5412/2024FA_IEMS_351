@@ -36,9 +36,7 @@ def bisection_search(func, left, right, tol=1e-3, max_it=100):
         mid: float,
         estimated root of func
     """
-    print(
-        "======================================================================================\n"
-    )
+    print("======================================================================================\n")
     print("Bisection Search\n")
     # Check Corner Cases
     # Case 1: function value is already close to 0 either at left or right
@@ -64,8 +62,7 @@ def bisection_search(func, left, right, tol=1e-3, max_it=100):
     # Case 3: function values at both endpoints of the interval do not have the
     # opposite signs
     assert func(left) * func(right) < 0, (
-        "A error is encountered in the bisection method: "
-        "func(left) func(right) must have opposite signs!\n"
+        "A error is encountered in the bisection method: " "func(left) func(right) must have opposite signs!\n"
     )
 
     # main loop
@@ -134,9 +131,7 @@ def newton_root_search(func, init_guess, tol=1e-3, max_it=100):
         est_root: float,
         estimated root of func
     """
-    print(
-        "======================================================================================\n"
-    )
+    print("======================================================================================\n")
     print("Newton's Method\n")
     # set the iteration counter
     it_counter = 0
@@ -146,11 +141,7 @@ def newton_root_search(func, init_guess, tol=1e-3, max_it=100):
     # (6) compute the function value and gradient
     value, gradient = func(est_root)
     # ======================================================================================
-    print(
-        "Iteration {}, x = {}, f(x) = {}, f'(x) = {}\n".format(
-            it_counter, est_root, value, gradient
-        )
-    )
+    print("Iteration {}, x = {}, f(x) = {}, f'(x) = {}\n".format(it_counter, est_root, value, gradient))
     while abs(value) > tol:
         # ======================================================================================
         # (7) update the estimated root
@@ -163,11 +154,7 @@ def newton_root_search(func, init_guess, tol=1e-3, max_it=100):
         value, gradient = func(est_root)
         # ======================================================================================
         # display the results
-        print(
-            "Iteration {}, x = {}, f(x) = {}, f'(x) = {}\n".format(
-                it_counter, est_root, value, gradient
-            )
-        )
+        print("Iteration {}, x = {}, f(x) = {}, f'(x) = {}\n".format(it_counter, est_root, value, gradient))
         if it_counter >= max_it:
             print("Warning: Maximum number of iterations is reached!\n")
             print("Output the last midpoint as the estimated solution.\n")
