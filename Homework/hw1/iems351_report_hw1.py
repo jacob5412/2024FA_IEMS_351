@@ -5,7 +5,6 @@ import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
-
 from iems351_tools_hw1 import bisection_search, newton_root_search
 
 
@@ -64,52 +63,38 @@ if __name__ == "__main__":
 
     # Bisection method
     # function 1: f(x) = x + cos(x) + exp(x)
-    print(
-        "######################################################################################\n"
-    )
+    print("######################################################################################\n")
     print("Using bisection method to find the root of f(x) = x + cos(x) + exp(x)\n")
     root_guess_b1 = bisection_search(func=func1, left=-3, right=3)
 
     # function 3:
     # f(x) = x^3 * exp(3x) + x
-    print(
-        "######################################################################################\n"
-    )
+    print("######################################################################################\n")
     print("Using bisection method to find the root of f(x) = x^3 * exp(3x) + x\n")
     root_guess_b3 = bisection_search(func=func3, left=-1, right=1)
 
     # function 4: f(x) = x^2 - 3 x + 2
-    print(
-        "######################################################################################\n"
-    )
+    print("######################################################################################\n")
     print("Using bisection method to find the root of f(x) = x^2 - 3 x + 2\n")
     root_guess_b4 = bisection_search(func=func4, left=0, right=1.5)
 
     # Newton's method
     # function 1: f(x) = x + cos(x) + exp(x)
-    print(
-        "######################################################################################\n"
-    )
+    print("######################################################################################\n")
     print("Using Newton's method to find the root of f(x) = x + cos(x) + exp(x)\n")
     root_guess_n1 = newton_root_search(func=func1_with_gradient, init_guess=3)
 
     # function 2: f(x) = x^2
-    print(
-        "######################################################################################\n"
-    )
+    print("######################################################################################\n")
     print("Using Newton's method to find the root of f(x) = x^2\n")
     root_guess_n2 = newton_root_search(func=func2_with_gradient, init_guess=-1)
 
     # function 3: x^3 * exp(3x) + x
-    print(
-        "######################################################################################\n"
-    )
+    print("######################################################################################\n")
     print("Using Newton's method to find the root of f(x) = x^3 * exp(3x) + x\n")
     root_guess_n3 = newton_root_search(func=func3_with_gradient, init_guess=0.5)
 
     # function 4: f(x) = x^2 - 3 x + 2
-    print(
-        "######################################################################################\n"
-    )
+    print("######################################################################################\n")
     print("Using Newton's method to find the root of f(x) = x^2 - 3 x + 2\n")
     root_guess_n4 = newton_root_search(func=func4_with_gradient, init_guess=0.5)
