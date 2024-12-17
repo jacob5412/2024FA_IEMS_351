@@ -28,7 +28,7 @@ def factorize_with_mod(H, init_correction_factor, increase_factor):
         try:
             # ======================================================================================
             # TODO Use np.linalg.cholesky to perform Cholesky decomposition
-            L = __________________please_type_your_answer_here__________________
+            L = np.linalg.cholesky(H_cp)
             # ======================================================================================
         except np.linalg.LinAlgError:
             flag_pd = False
@@ -37,8 +37,8 @@ def factorize_with_mod(H, init_correction_factor, increase_factor):
         if not flag_pd:
             # ======================================================================================
             # TODO increase the correction factor and modify the hessian matrix
-            correction_factor *= __________________please_type_your_answer_here__________________
-            H_cp = __________________please_type_your_answer_here__________________
+            correction_factor *= increase_factor
+            H_cp = H_cp + correction_factor * I
             # ======================================================================================
             it += 1
     if it == 0:
@@ -73,9 +73,9 @@ def backtracking_linesearch(x, d, func_val_cur, grad_mul_d, model, param):
         # TODO Update the step size, function values along the line and relaxed tangent line at the new iterate
         # reduce the step size
         alpha_descent *= param["decrease_factor"]
-        x_next = __________________please_type_your_answer_here__________________
-        f_along_line = __________________please_type_your_answer_here__________________
-        f_relaxed_tangent = __________________please_type_your_answer_here__________________
+        x_next = x + alpha_descent * d
+        f_along_line = model["func"](x_next)
+        f_relaxed_tangent = func_val_cur + alpha_descent * param["eta"] * grad_mul_d
         # ======================================================================================
         it_count += 1
         if it_count > param["max_it_backtracking"]:
@@ -127,13 +127,13 @@ def newton_method_minimize(x_init, model, param):
             break
         # ======================================================================================
         # TODO Cholesky factorization
-        L, correction_factor = __________________please_type_your_answer_here__________________
+        L, correction_factor = factorize_with_mod(hessian_cur, param["correction_factor"], param["increase_factor"])
         # ======================================================================================
         # ======================================================================================
         # TODO use sp.linalg.solve_triangular to solve L v = - g_cur
-        v = __________________please_type_your_answer_here__________________
+        v = sp.linalg.solve_triangular(L, -g_cur, lower=True)
         # TODO use sp.linalg.solve_triangular to solve L^\top d = v
-        d = __________________please_type_your_answer_here__________________
+        d = sp.linalg.solve_triangular(L.T, v, lower=False)
         # ======================================================================================
         norm_d = np.linalg.norm(d)
         grad_mul_d = g_cur @ d
@@ -147,7 +147,9 @@ def newton_method_minimize(x_init, model, param):
             elif param["linesearch"] == "backtracking":
                 # ======================================================================================
                 # TODO Backtracking Line Search
-                x_next, alpha_descent, flag_success = __________________please_type_your_answer_here__________________
+                x_next, alpha_descent, flag_success = backtracking_linesearch(
+                    x_cur, d, func_val_cur, grad_mul_d, model, param
+                )
                 # ======================================================================================
                 if not flag_success:
                     x_next = x_cur - alpha_descent * g_cur
